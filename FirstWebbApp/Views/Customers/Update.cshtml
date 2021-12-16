@@ -1,0 +1,37 @@
+﻿@model FirstWebbApp.Models.Customers.CustomerModel
+<form asp-action="Update" asp-controller="Customers">
+    <fieldset>
+        <legend><b>FORM</b></legend>
+        <input asp-for="ID" hidden />
+        <label>Name:</label>
+        <input asp-for="Name" type="text" size=30>
+        <br>
+        <span class="text-danger" asp-validation-for="Name"></span>
+        <br>
+        <br>
+        <label>Lastname:</label>
+        <input asp-for="LastName" type="text" size=30>
+        <br>
+        <span class="text-danger" asp-validation-for="LastName"></span>
+        <br>
+        <label>Email:</label>
+        <input asp-for="Email" type="email" size=30>
+        <br>
+        <span class="text-danger" asp-validation-for="Email"></span>
+        <br>
+        <br>
+        <label>Number:</label>
+        <input asp-for="Number" type="tel" size=30>
+        <br>
+        <span class="text-danger" asp-validation-for="Number"></span>
+        <br>
+        <br>
+        <input asp-for="Age" type="text" size=30>
+        <br>
+        <span class="text-danger" asp-validation-for="Age"></span>
+        <input type="checkbox">I agree the terms
+        <br>
+        <br>
+        <button type="submit">Update</button>
+    </fieldset>
+</form>

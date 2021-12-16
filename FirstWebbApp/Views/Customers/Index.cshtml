@@ -1,0 +1,40 @@
+﻿@model List<FirstWebbApp.Models.Customers.CustomerModel>
+<h1>@ViewBag.Text</h1>
+<h1>@ViewData["Text2"]</h1>
+<h1>@ViewBag.Message</h1>
+<partial name="Text"/>
+<table border="1" width=50%>
+    <tr>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Number</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th></th>
+    </tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.Name</td>
+            <td>@m.LastName</td>
+            <td>@m.Number</td>
+            <td>@m.Email</td>
+            <td>@m.Age</td>
+            <td>
+                <a asp-route-id="@m.ID" asp-action="Update" asp-controller="Customers">Update</a>
+            </td>
+            <td>
+                @{
+                    int id = m.ID;
+                }
+                <form asp-action="Delete" asp-controller="Customers">
+                    <input asp-for="@id" hidden/>
+                    <button class="btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<br>
+<a asp-action="Create" asp-controller="Customers">Create</a>
+
