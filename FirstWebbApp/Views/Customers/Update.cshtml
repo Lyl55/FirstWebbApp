@@ -1,37 +1,29 @@
 ﻿@model FirstWebbApp.Models.Customers.CustomerModel
 <form asp-action="Update" asp-controller="Customers">
-    <fieldset>
-        <legend><b>FORM</b></legend>
-        <input asp-for="ID" hidden />
-        <label>Name:</label>
-        <input asp-for="Name" type="text" size=30>
-        <br>
-        <span class="text-danger" asp-validation-for="Name"></span>
-        <br>
-        <br>
-        <label>Lastname:</label>
-        <input asp-for="LastName" type="text" size=30>
-        <br>
-        <span class="text-danger" asp-validation-for="LastName"></span>
-        <br>
-        <label>Email:</label>
-        <input asp-for="Email" type="email" size=30>
-        <br>
-        <span class="text-danger" asp-validation-for="Email"></span>
-        <br>
-        <br>
-        <label>Number:</label>
-        <input asp-for="Number" type="tel" size=30>
-        <br>
-        <span class="text-danger" asp-validation-for="Number"></span>
-        <br>
-        <br>
-        <input asp-for="Age" type="text" size=30>
-        <br>
-        <span class="text-danger" asp-validation-for="Age"></span>
-        <input type="checkbox">I agree the terms
-        <br>
-        <br>
-        <button type="submit">Update</button>
-    </fieldset>
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <input asp-for="ID" hidden />
+
+    <label>Firstname: </label>
+    <input asp-for="Name" /> <br />
+    @*<span class="text-danger" asp-validation-for="Firstname"></span><br />*@
+
+    <label>Lastname: </label>
+    <input asp-for="LastName" /> <br />
+    @*<span class="text-danger" asp-validation-for="Lastname"></span><br />*@
+
+    <label>Email: </label>
+    <input asp-for="Email" /> <br />
+    @*<span class="text-danger" asp-validation-for="Email"></span><br />*@
+    <label>Age: </label>
+    <input asp-for="Age" /> <br />
+    @*<span class="text-danger" asp-validation-for="Age"></span><br />*@
+
+    <label>PhoneNumber: </label>
+    <input type="tel" asp-for="Number" /> <br />
+    @*<span class="text-danger" asp-validation-for="PhoneNumber"></span><br />*@
+
+    <button type="submit">Update</button>
 </form>
+
+<partial name="_ValidationScriptsPartial" />

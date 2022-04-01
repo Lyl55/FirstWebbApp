@@ -4,17 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using FirstWebbApp.DataAccessLayer.Abstraction;
 using FirstWebbApp.DataAccessLayer.Domain.Entities;
+using FirstWebbApp.Helpers.Abstraction;
 using FirstWebbApp.Models.Customers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace FirstWebbApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomersController:BaseController
     {
-        public CustomersController(IDataBase db) : base(db)
+        private readonly IDataBaseLogHelper _dataBaseLogHelper;
+        
+        public CustomersController(IDataBase db,IDataBaseLogHelper dataBaseLogHelper) : base(db)
         {
-
+            _dataBaseLogHelper = dataBaseLogHelper;
         }
         [HttpGet]
         public IActionResult Index()

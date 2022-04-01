@@ -8,8 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirstWebbApp.Controllers;
 using FirstWebbApp.DataAccessLayer;
 using FirstWebbApp.DataAccessLayer.Abstraction;
+using FirstWebbApp.DataAccessLayer.Domain.Entities;
+using FirstWebbApp.Helpers;
+using FirstWebbApp.Helpers.Abstraction;
+using FirstWebbApp.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace FirstWebbApp
 {
@@ -27,7 +33,21 @@ namespace FirstWebbApp
         {
             services.AddSingleton<IDataBase, InmemoryDatabase>();
             services.AddSingleton<IDataBS, InMemoryDB>();
+            services.AddSingleton<IUnitOfWork, InMemoryUnitOfWork>();
+            services.AddSingleton<IDataBaseLogHelper,DatabaseLogHelper>();
             services.AddControllersWithViews();
+            services.AddIdentity<Account,Role>();
+            services.AddTransient<IUserStore<Account>, UserStore>();//asp.net default transiet edir 
+            services.AddTransient<IRoleStore<Role>, RoleStore>();
+
+            services.Configure<IdentityOptions>(o =>
+            {
+                o.Password.RequireDigit = false;
+                o.Password.RequiredLength = 1;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequireUppercase = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +68,7 @@ namespace FirstWebbApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

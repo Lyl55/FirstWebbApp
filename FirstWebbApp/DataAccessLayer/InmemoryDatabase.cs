@@ -15,9 +15,11 @@ namespace FirstWebbApp.DataAccessLayer
 {
     public class InmemoryDatabase:IDataBase
     {
+        private const string _datastate = "customers.json";
+        private const string _operationDatastate = "operation.json";
         private const string filepath = "_customers.json";
         private readonly List<Customer> _customers = new List<Customer>();
-
+        private readonly List<string> _operations = new List<string>();
         public InmemoryDatabase()
         {
             if (File.Exists(filepath))
@@ -25,6 +27,13 @@ namespace FirstWebbApp.DataAccessLayer
                 string raw = File.ReadAllText(filepath);
                 var cust = JsonConvert.DeserializeObject<Customer[]>(raw);
                 _customers.AddRange(cust);
+            }
+            if (File.Exists(_operationDatastate))
+            {
+                string rawText = File.ReadAllText(_operationDatastate);
+                var operations = JsonConvert.DeserializeObject<string[]>(rawText);
+
+                _operations.AddRange(operations);
             }
             /*_customers.Add(new Customer
             {
@@ -80,6 +89,11 @@ namespace FirstWebbApp.DataAccessLayer
         public IList<Customer> Get()
         {
             return _customers;
+        }
+
+        public void AddOperation(string operation)
+        {
+            _operations.Add(operation);
         }
 
 

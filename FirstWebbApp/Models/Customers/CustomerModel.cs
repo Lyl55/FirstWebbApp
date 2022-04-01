@@ -12,7 +12,7 @@ namespace FirstWebbApp.Models.Customers
         [Required] public string Name { get; set; }
         [Required] public string LastName { get; set; }
         [Required] public string Number { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required for registration")]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

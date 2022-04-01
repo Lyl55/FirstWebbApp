@@ -6,13 +6,12 @@ using FirstWebbApp.DataAccessLayer.Domain.Entities;
 
 namespace FirstWebbApp.DataAccessLayer.Abstraction
 {
-    public interface IDataBase
+    public interface IAccountRepo
     {
-        void Add(Customer customer);
-        void Update(Customer customer);
+        void Add(Account account);
+        void Update(Account account);
+        Account Get(int id);
+        Account GetUserName(string username);
         void Delete(int id);
-        Customer Get(int id);
-        IList<Customer> Get();
-        void AddOperation(string operation);
     }
 }
