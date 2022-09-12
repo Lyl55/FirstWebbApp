@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Prometheus;
 
 namespace FirstWebbApp
 {
@@ -13,7 +14,10 @@ namespace FirstWebbApp
     {
         public static void Main(string[] args)
         {
+            var server = new MetricServer(10090);
+            server.Start();
             CreateHostBuilder(args).Build().Run();
+            server.Stop();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

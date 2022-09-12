@@ -16,6 +16,7 @@ using FirstWebbApp.Helpers;
 using FirstWebbApp.Helpers.Abstraction;
 using FirstWebbApp.Identity;
 using Microsoft.AspNetCore.Identity;
+using Prometheus;
 
 namespace FirstWebbApp
 {
@@ -70,6 +71,7 @@ namespace FirstWebbApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHttpMetrics();//prometheus
 
             app.UseEndpoints(endpoints =>
             {
